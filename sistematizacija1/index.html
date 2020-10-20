@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Stereos + Three.js</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel=stylesheet href="css/base.css"/>
+</head>
+<body>
+
+<script src="../threejs/Three.js"></script>
+<script src="../threejs/Detector.js"></script>
+<script src="../threejs/OrbitControls.js"></script>
+<script src="../threejs/BufferAttribute.js"></script>
+<script src="../threejs/BufferGeometry.js"></script>
+<script src="../threejs/EdgesHelper.js"></script>
+<script src="../threejs/THREEx.KeyboardState.js"></script>
+<script src="../threejs/THREEx.FullScreen.js"></script>
+<script src="../threejs/THREEx.WindowResize.js"></script>
+
+<!-- ------------------------------------------------------------ -->
+
+
+<div id="ThreeJS" style="position: absolute; left:0px; top:0px"></div>
+
+<!-- <input type="button" style="position: absolute; left:0px; top:0px; z-index:1;" onclick="params()"/> -->
+
+<script>
+var FONT_SIZE = 22;
+var container, scene, camera, renderer, controls, scene_text;
+
+// var mesh0, egh0;
+// function toggleVisibility() {
+//   mesh0.visible = !mesh0.visible;
+//   egh0.visible = !egh0.visible;
+//   render();
+// }
+
+init();
+render();
+
+function init() 
+{
+        // SCENE
+        scene = new THREE.Scene();
+        scene_text = new THREE.Scene();
+
+        // CAMERA
+        var SCREEN_WIDTH = window.innerWidth-5, SCREEN_HEIGHT = window.innerHeight-5;
+        var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.01, FAR = 20000;
+        camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
+        var r = 4, phi = Math.PI/4, theta = Math.PI/4;
+        camera.position.set(r*Math.cos(phi)*Math.sin(theta),r*Math.sin(phi), r*Math.cos(phi)*Math.cos(theta));
+
+        // RENDERER
+        if ( Detector.webgl )
+                renderer = new THREE.WebGLRenderer( {antialias:true} );
+        else
+                renderer = new THREE.CanvasRenderer(); 
+        renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+        renderer.autoClear = false;
+
+        // CONTAINER
+        container = document.getElementById( 'ThreeJS' );
+        container.appendChild( renderer.domElement );
+
+        // EVENTS
+        THREEx.WindowResize(renderer, camera);
+        THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
+
+        // CONTROLS
+        controls = new THREE.OrbitControls( camera, renderer.domElement );
+        controls.addEventListener( 'change', render );
+        controls.target = new THREE.Vector3(0, 0, 0);
+
+        // LIGHTS
+        var light1 = new THREE.PointLight(0xffffff);
+        light1.position.set(0,1000,1000);
+        scene.add(light1);
+        var light2 = new THREE.PointLight(0xffffff);
+        light2.position.set(0,-1000,-1000);
+        scene.add(light2);
+        
+        /////////////
+        // OBJECTS //
+        /////////////
+        
+
+var geometry0 = new THREE.Geometry()
+geometry0.vertices = [new THREE.Vector3(0.848528, 0, 0), new THREE.Vector3(5.19574e-17, 0, 0.848528), new THREE.Vector3(-0.848528, 0, 1.03915e-16), new THREE.Vector3(-1.55872e-16, 0, -0.848528), new THREE.Vector3(-3.8968e-17, 0.8, 2.77556e-17)]; 
+geometry0.faces = [new THREE.Face3(3, 2, 1), new THREE.Face3(3, 1, 0), new THREE.Face3(1, 4, 0), new THREE.Face3(2, 4, 1), new THREE.Face3(3, 4, 2), new THREE.Face3(0, 4, 3)]; 
+geometry0.computeFaceNormals();
+geometry0.computeVertexNormals();
+var material0 = new THREE.MeshBasicMaterial( { color: 0x00ff00, transparent: true, opacity: 0.5 });
+mesh0 = new THREE.Mesh( geometry0, material0);
+scene.add(mesh0);
+egh0 = new THREE.EdgesHelper( mesh0, 0x000 );
+egh0.material.linewidth = 2;
+scene.add( egh0 );
+var geometry1 = new THREE.Geometry()
+geometry1.vertices = [new THREE.Vector3(0.339411, 0, 0), new THREE.Vector3(2.07829e-17, 0, 0.339411), new THREE.Vector3(-0.339411, 0, 4.15659e-17), new THREE.Vector3(-6.23488e-17, 0, -0.339411), new THREE.Vector3(0.339411, 0.48, 0), new THREE.Vector3(2.07829e-17, 0.48, 0.339411), new THREE.Vector3(-0.339411, 0.48, 4.15659e-17), new THREE.Vector3(-6.23488e-17, 0.48, -0.339411)]; 
+geometry1.faces = [new THREE.Face3(3, 2, 1), new THREE.Face3(3, 1, 0), new THREE.Face3(4, 5, 6), new THREE.Face3(4, 6, 7), new THREE.Face3(0, 1, 5), new THREE.Face3(0, 5, 4), new THREE.Face3(1, 2, 6), new THREE.Face3(1, 6, 5), new THREE.Face3(2, 3, 7), new THREE.Face3(2, 7, 6), new THREE.Face3(3, 0, 4), new THREE.Face3(3, 4, 7)]; 
+geometry1.computeFaceNormals();
+geometry1.computeVertexNormals();
+var material1 = new THREE.MeshBasicMaterial( { color: 0xffff00 });
+mesh1 = new THREE.Mesh( geometry1, material1);
+scene.add(mesh1);
+egh1 = new THREE.EdgesHelper( mesh1, 0x000 );
+egh1.material.linewidth = 2;
+scene.add( egh1 );
+var geometry2 = new THREE.Geometry()
+geometry2.vertices = [new THREE.Vector3(-0.848528, 0, 1.03915e-16), new THREE.Vector3(-3.8968e-17, 0.8, 2.77556e-17), new THREE.Vector3(0.848528, 0, 0)]; 
+geometry2.faces = [new THREE.Face3(0, 1, 2)]; 
+geometry2.computeFaceNormals();
+geometry2.computeVertexNormals();
+var material2 = new THREE.MeshBasicMaterial( { color: 0xff0000, side: THREE.DoubleSide, transparent: true, opacity: 0.5 });
+mesh2 = new THREE.Mesh( geometry2, material2);
+scene.add(mesh2);
+egh2 = new THREE.EdgesHelper( mesh2, 0x000 );
+egh2.material.linewidth = 2;
+scene.add( egh2 );
+var geometry3 = new THREE.Geometry()
+geometry3.vertices = [new THREE.Vector3(-3.8968e-17, 0, 2.77556e-17), new THREE.Vector3(-3.8968e-17, 0.8, 2.77556e-17) ];
+geometry3.computeLineDistances();
+var material3 = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 2} );
+var line3 = new THREE.Line( geometry3, material3 );
+scene.add( line3 );
+var geometry4 = new THREE.Geometry()
+geometry4.vertices = [new THREE.Vector3(0.339411, 0.48, 0), new THREE.Vector3(-0.339411, 0.48, 4.15659e-17) ];
+geometry4.computeLineDistances();
+var material4 = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 2} );
+var line4 = new THREE.Line( geometry4, material4 );
+scene.add( line4 );
+var geometry5 = new THREE.Geometry()
+geometry5.vertices = [new THREE.Vector3(-3.8968e-17, 0, 2.77556e-17)];
+var texture = makePointTexture();var material5 = new THREE.ParticleBasicMaterial( {map : texture, transparent: true, size: 0.1} );
+ps5 = new THREE.ParticleSystem(geometry5, material5);scene_text.add(ps5);
+spritey = makeTextSprite( "T", { fontsize: FONT_SIZE, backgroundColor: {r:255, g:100, b:100, a:0} } );
+spritey.position = new THREE.Vector3(-3.8968e-17, 0, 2.77556e-17);
+scene_text.add( spritey );
+var geometry6 = new THREE.Geometry()
+geometry6.vertices = [new THREE.Vector3(-3.8968e-17, 0.8, 2.77556e-17)];
+var texture = makePointTexture();var material6 = new THREE.ParticleBasicMaterial( {map : texture, transparent: true, size: 0.1} );
+ps6 = new THREE.ParticleSystem(geometry6, material6);scene_text.add(ps6);
+spritey = makeTextSprite( "M", { fontsize: FONT_SIZE, backgroundColor: {r:255, g:100, b:100, a:0} } );
+spritey.position = new THREE.Vector3(-3.8968e-17, 0.8, 2.77556e-17);
+scene_text.add( spritey );
+var geometry7 = new THREE.Geometry()
+geometry7.vertices = [new THREE.Vector3(0.848528, 0, 0)];
+var texture = makePointTexture();var material7 = new THREE.ParticleBasicMaterial( {map : texture, transparent: true, size: 0.1} );
+ps7 = new THREE.ParticleSystem(geometry7, material7);scene_text.add(ps7);
+spritey = makeTextSprite( "A", { fontsize: FONT_SIZE, backgroundColor: {r:255, g:100, b:100, a:0} } );
+spritey.position = new THREE.Vector3(0.848528, 0, 0);
+scene_text.add( spritey );
+var geometry8 = new THREE.Geometry()
+geometry8.vertices = [new THREE.Vector3(-0.848528, 0, 1.03915e-16)];
+var texture = makePointTexture();var material8 = new THREE.ParticleBasicMaterial( {map : texture, transparent: true, size: 0.1} );
+ps8 = new THREE.ParticleSystem(geometry8, material8);scene_text.add(ps8);
+spritey = makeTextSprite( "C", { fontsize: FONT_SIZE, backgroundColor: {r:255, g:100, b:100, a:0} } );
+spritey.position = new THREE.Vector3(-0.848528, 0, 1.03915e-16);
+scene_text.add( spritey );
+var geometry9 = new THREE.Geometry()
+geometry9.vertices = [new THREE.Vector3(0.339411, 0.48, 0)];
+var texture = makePointTexture();var material9 = new THREE.ParticleBasicMaterial( {map : texture, transparent: true, size: 0.1} );
+ps9 = new THREE.ParticleSystem(geometry9, material9);scene_text.add(ps9);
+spritey = makeTextSprite( "A1", { fontsize: FONT_SIZE, backgroundColor: {r:255, g:100, b:100, a:0} } );
+spritey.position = new THREE.Vector3(0.339411, 0.48, 0);
+scene_text.add( spritey );
+var geometry10 = new THREE.Geometry()
+geometry10.vertices = [new THREE.Vector3(-0.339411, 0.48, 4.15659e-17)];
+var texture = makePointTexture();var material10 = new THREE.ParticleBasicMaterial( {map : texture, transparent: true, size: 0.1} );
+ps10 = new THREE.ParticleSystem(geometry10, material10);scene_text.add(ps10);
+spritey = makeTextSprite( "C1", { fontsize: FONT_SIZE, backgroundColor: {r:255, g:100, b:100, a:0} } );
+spritey.position = new THREE.Vector3(-0.339411, 0.48, 4.15659e-17);
+scene_text.add( spritey );
+var geometry11 = new THREE.Geometry()
+geometry11.vertices = [new THREE.Vector3(-3.8968e-17, 0.48, 2.77556e-17)];
+var texture = makePointTexture();var material11 = new THREE.ParticleBasicMaterial( {map : texture, transparent: true, size: 0.1} );
+ps11 = new THREE.ParticleSystem(geometry11, material11);scene_text.add(ps11);
+spritey = makeTextSprite( "O", { fontsize: FONT_SIZE, backgroundColor: {r:255, g:100, b:100, a:0} } );
+spritey.position = new THREE.Vector3(-3.8968e-17, 0.48, 2.77556e-17);
+scene_text.add( spritey );
+
+  controls.update();
+}
+
+
+function makePointTexture() {
+  var canvas = document.createElement("canvas");
+  canvas.width = 100; canvas.height = 100;
+  var context = canvas.getContext("2d");
+  var centerX = canvas.width / 2, centerY = canvas.height / 2, radius = 40;
+  context.beginPath();
+  context.arc(centerX, centerY, radius, 0, 2*Math.PI, false);
+  context.fillStyle = 'red';
+  context.fill();
+  context.strokeStyle = '#000000';
+  context.lineWidth = 5;
+  context.stroke();
+  context.closePath();
+
+  var texture = new THREE.Texture(canvas);
+  texture.needsUpdate = true;
+
+  return texture;
+}
+
+function makeTextSprite( message, parameters )
+{
+	if ( parameters === undefined ) parameters = {};
+	
+	var fontface = parameters.hasOwnProperty("fontface") ? 
+		parameters["fontface"] : "Arial";
+	
+	var fontsize = parameters.hasOwnProperty("fontsize") ? 
+		parameters["fontsize"] : 18;
+	
+	var borderThickness = parameters.hasOwnProperty("borderThickness") ? 
+		parameters["borderThickness"] : 4;
+	
+	var borderColor = parameters.hasOwnProperty("borderColor") ?
+		parameters["borderColor"] : { r:0, g:0, b:0, a:1.0 };
+	
+	var backgroundColor = parameters.hasOwnProperty("backgroundColor") ?
+		parameters["backgroundColor"] : { r:255, g:255, b:255, a:1.0 };
+
+	var spriteAlignment = THREE.SpriteAlignment.topLeft;
+
+	var canvas = document.createElement('canvas');
+	var context = canvas.getContext('2d');
+	context.font = "Bold " + fontsize + "px " + fontface;
+    
+	// get size data (height depends only on font size)
+	var metrics = context.measureText( message );
+	var textWidth = metrics.width;
+	
+	// background color
+	context.fillStyle   = "rgba(" + backgroundColor.r + "," + backgroundColor.g + ","
+								  + backgroundColor.b + "," + backgroundColor.a + ")";
+	// border color
+	context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + ","
+								  + borderColor.b + "," + borderColor.a + ")";
+
+	context.lineWidth = borderThickness;
+	
+	// text color
+	context.fillStyle = "rgba(0, 0, 0, 1.0)";
+
+	context.fillText( message, borderThickness, fontsize + borderThickness);
+	
+	// canvas contents will be used for a texture
+	var texture = new THREE.Texture(canvas) 
+	texture.needsUpdate = true;
+
+	var spriteMaterial = new THREE.SpriteMaterial( 
+		{ map: texture, useScreenCoordinates: false, alignment: spriteAlignment} );
+	var sprite = new THREE.Sprite( spriteMaterial );
+	sprite.scale.set(2,1,1);
+	return sprite;	
+}
+
+function render() 
+{
+	renderer.clear();
+	renderer.render( scene, camera );
+	renderer.clearDepth();
+	renderer.render( scene_text, camera );
+}
+
+
+function params() {
+   alert("Target: " + controls.target.x.toFixed(2) + ", " + controls.target.y.toFixed(2) + ", " + controls.target.z.toFixed(2) + "\n" +
+         "Camera: " + camera.position.x.toFixed(2) + ", " + camera.position.y.toFixed(2) + ", " + camera.position.z.toFixed(2));
+}
+
+</script>
+
+</body>
+</html>
+
